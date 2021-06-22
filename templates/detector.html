@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <main>
+        <div class="pricing-header ml-2 p-5 small mx-auto text-center">
+          <h1 class="display-4 fw-normal">Object detector</h1>
+          <p class="fs-5 text-muted">Данная модель - стандартная реализация yolo5, поизаимствованная с фреймоворка torch. Файлы, которые можно скармливать моделе: jpg и jpeg</p>
+        </div>
+        <div class="row row-cols-2 ml-5 p-5 small mx-auto text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Отправка фотографии</h4>
+              </div>
+              <div class="card-body">
+
+                <form class="form-group" action="/" method="POST" enctype="multipart/form-data">
+
+                    <ul class="list-unstyled mt-3 mb-4">
+                      <input class="form-control-file" type="file" name="file">
+                    </ul>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <ul class="text-danger">
+                                {% for message in messages %}
+                                {{ message }}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                    <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Загрузить</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Фото с боксами</h4>
+              </div>
+              <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+
+                    {% if photo is not none %}
+                    <img alt="Здесь будет ваша фотография" class="img-fluid" src='static/photos/out/{{ photo }}' >
+                    {% else %}
+                    <h1>>Здесь будет ваша фотография</h1>
+                    {% endif %}
+                </ul>
+                </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </main>
+{% endblock %}
