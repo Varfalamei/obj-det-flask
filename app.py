@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, send_from_directory, flash, redirect
 from werkzeug.exceptions import RequestEntityTooLarge
 from time import time
-from config import Config
+from config import *
 from model import Model
 from telegram import Bot
 import os
@@ -10,19 +10,20 @@ import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
-bot_owner_id = 275319916
-bot_token = "925275676:AAG0SpykgoxkNu8O0YL28M8DVteAj9q_PU8"
 bot = Bot(bot_token)
+model = Model()
 
 
 def clear(path) -> None:
     for item in os.listdir(path):
         p = f'{path}/{item}'
-        now = time(); created = os.path.getmtime(p)
-        if round(now - created) > 150: os.remove(p)
+        now = time()
+        created = os.path.getmtime(p)
+        if round(now - created) > 150:
+            os.remove(p)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('detector.html')
 
@@ -39,7 +40,7 @@ def upload_file():
     except RequestEntityTooLarge:
         flash('File size too large.  Limit is 16 MB.')
         return redirect('/')
-    model = Model()
+
     if f.filename != '':
         if f.content_type not in ('image/jpeg', 'image/jpg'):
             flash('Please resend the photo in the required format')
