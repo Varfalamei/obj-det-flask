@@ -35,4 +35,4 @@ python3 app.py
 Input photo
 ![alt text](screenshots/people_rest.jpg "Описание будет тут")
 Output photo
-![alt text](screenshots/people_rest_det.png "Описание будет тут")
+![alt text](screenshots/people_rest_det.jpg "Описание будет тут")
