@@ -19,7 +19,14 @@ cd object-detection
 
 Git clone:
 ```
-git clone https://github.com/Varfalamei/obj-det-flask.git
+git clone https://github.com/Varfalamei/obj-det-flask.git ../object-detection/
+```
+
+Create venv: 
+```
+sudo apt install python3.8-venv
+python3 -m venv od_venv
+source od_venv/bin/activate
 ```
 
 Install requirements:

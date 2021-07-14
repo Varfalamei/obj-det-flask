@@ -4,7 +4,6 @@ from werkzeug.exceptions import RequestEntityTooLarge
 from time import time
 from config import *
 from model import Model
-from telegram import Bot
 import image_to_numpy
 import os
 import PIL
@@ -12,7 +11,6 @@ import PIL
 
 app = Flask(__name__)
 app.config.from_object(Config)
-bot = Bot(bot_token)
 model = Model()
 
 
@@ -56,7 +54,6 @@ def upload_file():
         img.save(path)
         photo = open(f'static/photos/in/{name}', 'rb')
         caption = 'new detection from web app'
-        bot.send_photo(bot_owner_id, photo, caption)
         res = model.getphoto(path)
         res.save('static/photos/out')
         for p in ['static/photos/in','static/photos/out']: clear(p)
