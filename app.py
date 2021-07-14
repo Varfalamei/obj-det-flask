@@ -5,7 +5,9 @@ from time import time
 from config import *
 from model import Model
 from telegram import Bot
+import image_to_numpy
 import os
+import PIL
 
 
 app = Flask(__name__)
@@ -49,7 +51,9 @@ def upload_file():
         _, ext = os.path.splitext(f.filename)
         name = f'{round(time()*1000)}{ext}'
         path = f'static/photos/in/{name}'
-        f.save(path)
+        img = image_to_numpy.load_image_file(f)
+        img = PIL.Image.fromarray(img, 'RGB')
+        img.save(path)
         photo = open(f'static/photos/in/{name}', 'rb')
         caption = 'new detection from web app'
         bot.send_photo(bot_owner_id, photo, caption)
