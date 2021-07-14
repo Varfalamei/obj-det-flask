@@ -53,7 +53,6 @@ def upload_file():
         img = PIL.Image.fromarray(img, 'RGB')
         img.save(path)
         photo = open(f'static/photos/in/{name}', 'rb')
-        caption = 'new detection from web app'
         res = model.getphoto(path)
         res.save('static/photos/out')
         for p in ['static/photos/in','static/photos/out']: clear(p)
