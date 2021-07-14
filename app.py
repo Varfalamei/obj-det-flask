@@ -49,9 +49,10 @@ def upload_file():
         _, ext = os.path.splitext(f.filename)
         name = f'{round(time()*1000)}{ext}'
         path = f'static/photos/in/{name}'
-        img = image_to_numpy.load_image_file(f)
-        img = PIL.Image.fromarray(img, 'RGB')
-        img.save(path)
+        f.save(path)
+        # img = image_to_numpy.load_image_file(f)
+        # img = PIL.Image.fromarray(img, 'RGB')
+        # img.save(path)
         photo = open(f'static/photos/in/{name}', 'rb')
         res = model.getphoto(path)
         res.save('static/photos/out')
